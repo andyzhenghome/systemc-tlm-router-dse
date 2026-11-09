@@ -26,7 +26,7 @@ AT 没有逐周期流水线，但**竞争一点没丢**：所有拥塞都被上�
 
 **实测三句话**：零负载延迟对齐解析式 22 ns（AT 24.11 ns / LT 23.00 ns）；AT 的延迟随负载从 24.11 涨到 72.29 ns 而 LT 恒为 23.00 ns；43 轮参数扫描主体在数秒内完成，这个速度才让「拓扑 × 路由 × 流量 × 注入率 × 消息长度」的组合搜索成为可能。
 
-配套代码全部可编译、可运行，扫描结果可复现。文章里所有数字都来自 `code/noc_txn_demo` 的真实输出。
+配套代码全部可编译、可运行，扫描结果可复现。全部文件（文章、源码、配图、43 轮扫描数据）都在公开仓库 [andyzhenghome/systemc-tlm-router-dse](https://github.com/andyzhenghome/systemc-tlm-router-dse)，§14 给出从 clone 开始的完整复现步骤。文章里所有数字都来自 `code/noc_txn_demo` 的真实输出。
 
 ---
 
@@ -811,17 +811,28 @@ AT 内核比 LT 慢约 5–9×，换来的是整条延迟-负载曲线、饱和�
 
 验证记录：SystemC 2.3.4 + GCC（MinGW-ucrt64）+ `-std=c++14`，`noc_txn_demo` / `tour` 全部编译通过；43 轮扫描全部成功，480 条消息每轮全部到达、边界丢包 0；AT credit 守恒（issued = returned）、LT 握手 `stalls = 0`；崩溃修复后同一配置压测 30 次 0 失败。
 
-复现：
+### 14.1 代码仓库与复现
+
+| 项 | 值 |
+| --- | --- |
+| 仓库 | [github.com/andyzhenghome/systemc-tlm-router-dse](https://github.com/andyzhenghome/systemc-tlm-router-dse) |
+| 分支 | `main`（公开） |
+| 内容 | 本文 Markdown / HTML、全部源码与 Makefile、10 张 SVG 配图与论文架构图、43 轮扫描的 CSV 与计时元数据 |
+
+依赖 SystemC 2.3.4（**库与示例必须用同一 C++ 标准编译**，本文为 C++14）、g++ 与 Python 3（仅标准库）。编译产物和本地 SystemC 构建目录不入库，所以 clone 后要显式传入安装前缀 `SYSTEMC`（指向含 `include/` 与 `lib/` 的目录）：
 
 ```bash
-cd code
-make                                   # noc_txn_demo + tour
-make run-at GAP=8                      # 轻载 AT（credit 流控）
-make run-lt GAP=8                      # LT 对照（ready/valid）
+git clone https://github.com/andyzhenghome/systemc-tlm-router-dse.git
+cd systemc-tlm-router-dse/code
+make SYSTEMC=/path/to/systemc       # 编译 noc_txn_demo + tour
+make run-at GAP=8                    # 轻载 AT（credit 流控）
+make run-lt GAP=8                    # LT 对照（ready/valid）
 ./noc_txn_demo at 4 4 30 4 xy torus uniform 64 16
-make run-tour
-make sweep                             # 43 轮扫描 + 出图 + 同步文章 + 生成 HTML
+make run-tour                        # TLM 接口特性巡礼
+make sweep                           # 43 轮扫描 + 出图 + 同步本文数字 + 生成 HTML
 ```
+
+`make sweep` 会重刷 `data/dse_results.csv`、全部 SVG、本文的表格与正文数字以及网页版；同步脚本锚点驱动且带一致性自检，重复运行不会漂移。只想看数据而不编译，直接读仓库里的 `data/dse_results.csv` 即可拿到 43 轮原始结果。
 
 ---
 
