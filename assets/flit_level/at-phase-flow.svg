@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="470" viewBox="0 0 1060 470" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif">
+<rect width="1060" height="470" fill="#ffffff"/>
+<text x="24" y="34" font-size="19" font-weight="700" fill="#16202c">AT 模型的相位流：四相握手承载一跳，扩展相位承载流水线</text>
+<line x1="24" y1="46" x2="1036" y2="46" stroke="#e3e8ef" stroke-width="1"/>
+
+<text x="30" y="115" font-size="12.5" font-weight="600" fill="#41536a">上游 initiator</text>
+<line x1="170" y1="110" x2="1020" y2="110" stroke="#e6ebf1" stroke-width="1"/>
+<text x="30" y="210" font-size="12.5" font-weight="600" fill="#41536a">本 router（target）</text>
+<line x1="170" y1="205" x2="1020" y2="205" stroke="#e6ebf1" stroke-width="1"/>
+<text x="30" y="305" font-size="12.5" font-weight="600" fill="#41536a">PEQ / 内部流水</text>
+<line x1="170" y1="300" x2="1020" y2="300" stroke="#e6ebf1" stroke-width="1"/>
+<text x="30" y="395" font-size="12.5" font-weight="600" fill="#41536a">下游 target</text>
+<line x1="170" y1="390" x2="1020" y2="390" stroke="#e6ebf1" stroke-width="1"/>
+<circle cx="170" cy="110" r="6" fill="#2563eb"/>
+<text x="170" y="94" font-size="10.5" text-anchor="middle" fill="#33445a">BEGIN_REQ</text>
+<circle cx="300" cy="205" r="6" fill="#0f9d88"/>
+<text x="300" y="189" font-size="10.5" text-anchor="middle" fill="#33445a">END_REQ</text>
+<circle cx="390" cy="300" r="6" fill="#7c5cd6"/>
+<text x="390" y="284" font-size="10.5" text-anchor="middle" fill="#33445a">RC_DONE</text>
+<circle cx="490" cy="300" r="6" fill="#7c5cd6"/>
+<text x="490" y="284" font-size="10.5" text-anchor="middle" fill="#33445a">VA_REQ→VA_GRANT</text>
+<circle cx="610" cy="300" r="6" fill="#7c5cd6"/>
+<text x="610" y="284" font-size="10.5" text-anchor="middle" fill="#33445a">SA @clk.pos()</text>
+<circle cx="720" cy="300" r="6" fill="#7c5cd6"/>
+<text x="720" y="284" font-size="10.5" text-anchor="middle" fill="#33445a">ST_DONE</text>
+<circle cx="820" cy="390" r="6" fill="#2563eb"/>
+<text x="820" y="374" font-size="10.5" text-anchor="middle" fill="#33445a">BEGIN_REQ(下一跳)</text>
+<circle cx="930" cy="110" r="6" fill="#e07a1f"/>
+<text x="930" y="94" font-size="10.5" text-anchor="middle" fill="#33445a">BEGIN_RESP≡credit</text>
+<line x1="176" y1="116" x2="294" y2="116" stroke="#2563eb" stroke-width="1.6"/><polygon points="294,116 287,112 287,120" fill="#2563eb"/>
+<line x1="306" y1="199" x2="384" y2="294" stroke="#0f9d88" stroke-width="1.6"/><polygon points="384,294 377,290 377,298" fill="#0f9d88"/>
+<line x1="396" y1="294" x2="484" y2="294" stroke="#7c5cd6" stroke-width="1.6"/><polygon points="484,294 477,290 477,298" fill="#7c5cd6"/>
+<line x1="496" y1="294" x2="604" y2="294" stroke="#7c5cd6" stroke-width="1.6"/><polygon points="604,294 597,290 597,298" fill="#7c5cd6"/>
+<line x1="616" y1="294" x2="714" y2="294" stroke="#7c5cd6" stroke-width="1.6"/><polygon points="714,294 707,290 707,298" fill="#7c5cd6"/>
+<line x1="726" y1="294" x2="814" y2="384" stroke="#7c5cd6" stroke-width="1.6"/><polygon points="814,384 807,380 807,388" fill="#7c5cd6"/>
+<line x1="826" y1="384" x2="924" y2="116" stroke="#e07a1f" stroke-width="1.6"/><polygon points="924,116 917,112 917,120" fill="#e07a1f"/>
+<line x1="930" y1="122" x2="930" y2="180" stroke="#e07a1f" stroke-width="1.6"/><polygon points="930,180 923,176 923,184" fill="#e07a1f"/>
+<rect x="170" y="410" width="850" height="48" rx="6" fill="#f6f8fa"/>
+<text x="182" y="430" font-size="11.5" fill="#4b5b6d">sc_time&amp; delay 不是 wait：它是一张随事务传递的「时间支票」，由 PEQ（AT）或 quantum keeper（LT）兑现。</text>
+<text x="182" y="450" font-size="11.5" fill="#4b5b6d">END_RESP 由上游经 fw 路径发回，完成这一跳的四相握手；BEGIN_RESP 同时承担 credit 归还。</text>
+</svg>

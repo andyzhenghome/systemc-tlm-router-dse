@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img">
+<title>抽象层级决策：一条消息一个事务</title>
+<desc>架构探索模型把一条完整消息抽象成一个 tlm_generic_payload，丢掉逐周期流水状态机，但必须保留输出链路上的竞争与时间注解。</desc>
+<text x="40.0" y="32.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="17" fill="#2C2C2A" text-anchor="start" font-weight="500">抽象层级决策：一条消息 = 一个事务</text>
+<text x="40.0" y="54.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">丢的是实现细节，不是物理约束 —— 竞争、串行化、反压一样都不能少</text>
+<rect x="40.0" y="76.0" width="920.0" height="62.0" rx="10.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.9"/>
+<text x="56.0" y="100.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15" fill="#2C2C2A" text-anchor="start" font-weight="500">一笔事务 = 一条完整消息，端到端复用同一个 payload</text>
+<text x="56.0" y="120.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">address = dst  ｜  data_length = msg_bytes  ｜  txn_ext: src / hops / inject_time / rt_choice</text>
+<text x="40.0" y="172.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" fill="#5F5E5A" text-anchor="start" font-weight="500">丢掉（本层不回答的问题）</text>
+<text x="520.0" y="172.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" fill="#0F6E56" text-anchor="start" font-weight="500">留下（否则模型退化成 LT）</text>
+<rect x="40.0" y="190.0" width="440.0" height="26.0" rx="5.0" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="54.0" y="208.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">×  逐周期流水状态机 RC / VA / SA / ST</text>
+<rect x="40.0" y="222.0" width="440.0" height="26.0" rx="5.0" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="54.0" y="240.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">×  VC 分配、可分离仲裁、HOL blocking</text>
+<rect x="40.0" y="254.0" width="440.0" height="26.0" rx="5.0" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="54.0" y="272.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">×  逐片事务与大量扩展相位</text>
+<rect x="40.0" y="286.0" width="440.0" height="26.0" rx="5.0" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="54.0" y="304.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">×  每周期唤醒的仲裁进程与 sc_clock</text>
+<rect x="520.0" y="190.0" width="440.0" height="26.0" rx="5.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="534.0" y="208.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="400">✓  输出链路 = 单服务器（竞争）</text>
+<rect x="520.0" y="222.0" width="440.0" height="26.0" rx="5.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="534.0" y="240.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="400">✓  sc_time&amp; 时间注解传递排队与串行化</text>
+<rect x="520.0" y="254.0" width="440.0" height="26.0" rx="5.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="534.0" y="272.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="400">✓  四相握手 + credit 流控 + PEQ</text>
+<rect x="520.0" y="286.0" width="440.0" height="26.0" rx="5.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="534.0" y="304.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="400">✓  analysis port / DMI / debug 统计旁路</text>
+<rect x="40.0" y="336.0" width="920.0" height="68.0" rx="8.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="58.0" y="362.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="start" font-weight="400">service = t_link + msg_bytes / link_bw       ｜       start = max(arrival + t_rc, link_free_at[op])</text>
+<text x="58.0" y="386.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">一条消息占链路多久只取决于长度与带宽；后来的消息必须等 —— 这是架构探索能看见饱和点的全部原因。</text>
+</svg>

@@ -1,0 +1,9 @@
+{
+  "kernel_at_ms": 6.884,
+  "kernel_lt_ms": 0.946,
+  "kernel_ratio": 7.276955602536999,
+  "proc_txn_at_s": 0.06070919999910984,
+  "proc_txn_lt_s": 0.05462229999830015,
+  "sweep_total_s": 3.8798632999969414,
+  "n_runs": 43
+}

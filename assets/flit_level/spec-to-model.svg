@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="700" viewBox="0 0 1060 700" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif">
+<rect width="1060" height="700" fill="#ffffff"/>
+<text x="24" y="34" font-size="19" font-weight="700" fill="#16202c">真实 VC router 架构 → TLM-2.0 建模构造　一一对应</text>
+<line x1="24" y1="46" x2="1036" y2="46" stroke="#e3e8ef" stroke-width="1"/>
+
+<text x="40" y="76" font-size="13" font-weight="700" fill="#5b6b7d">SPEC（Mullins et al., ASPDAC 2006, Fig.1　+　BookSim2 IQRouter）</text>
+<text x="620" y="76" font-size="13" font-weight="700" fill="#5b6b7d">TLM-2.0 构造（本文模型）</text>
+<rect x="40" y="92" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="122.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">Input Channel / 链路</text>
+<rect x="620" y="92" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="122.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">in / out[5] 两组 socket</text>
+<text x="310" y="114" font-size="11.5" fill="#6b7a8c">BW=32 的 socket + sc_time 时间注解</text>
+<line x1="295" y1="132" x2="613" y2="132" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,132 606,128 606,136" fill="#b9c7d6"/>
+<rect x="40" y="158" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="188.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">VC Buffer (FIFO)</text>
+<rect x="620" y="158" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="188.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">VC::fifo，队头阻塞自然成立</text>
+<text x="310" y="180" font-size="11.5" fill="#6b7a8c">deque&lt;gp*&gt; + buf_depth + credit[]</text>
+<line x1="295" y1="198" x2="613" y2="198" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,198 606,194 606,202" fill="#b9c7d6"/>
+<rect x="40" y="224" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="254.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">VC identifier</text>
+<rect x="620" y="224" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="254.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">逐跳字段，每跳被重写</text>
+<text x="310" y="246" font-size="11.5" fill="#6b7a8c">flit_ext::in_vc / in_port（ignorable ext）</text>
+<line x1="295" y1="264" x2="613" y2="264" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,264 606,260 606,268" fill="#b9c7d6"/>
+<rect x="40" y="290" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="320.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">Routing Logic (RC)</text>
+<rect x="620" y="290" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="320.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">route_to_id()：确定性 XY</text>
+<text x="310" y="312" font-size="11.5" fill="#6b7a8c">RC_DONE 扩展相位 + PEQ 通知</text>
+<line x1="295" y1="330" x2="613" y2="330" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,330 606,326 606,334" fill="#b9c7d6"/>
+<rect x="40" y="356" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="386.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">VC Allocator (VA)</text>
+<rect x="620" y="356" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="386.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">ovc_busy[][] + round-robin</text>
+<text x="310" y="378" font-size="11.5" fill="#6b7a8c">VA_REQ / VA_GRANT 扩展相位</text>
+<line x1="295" y1="396" x2="613" y2="396" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,396 606,392 606,400" fill="#b9c7d6"/>
+<rect x="40" y="422" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="452.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">Switch Allocator (SA)</text>
+<rect x="620" y="422" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="452.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">SA-i / SA-o 可分离分配</text>
+<text x="310" y="444" font-size="11.5" fill="#6b7a8c">SC_METHOD(arbitrate) @ clk.pos()</text>
+<line x1="295" y1="462" x2="613" y2="462" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,462 606,458 606,466" fill="#b9c7d6"/>
+<rect x="40" y="488" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="518.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">Crossbar (P×P)</text>
+<rect x="620" y="488" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="518.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">每输出端口每周期 1 个 flit</text>
+<text x="310" y="510" font-size="11.5" fill="#6b7a8c">ST_DONE 后向 out[op] 发 BEGIN_REQ</text>
+<line x1="295" y1="528" x2="613" y2="528" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,528 606,524 606,532" fill="#b9c7d6"/>
+<rect x="40" y="554" width="250" height="50" rx="7" fill="#fff8ec" stroke="#f0d9a8" stroke-width="1.3"/><text x="165.0" y="584.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">credit in / out</text>
+<rect x="620" y="554" width="400" height="50" rx="7" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.3"/><text x="820.0" y="584.0" font-size="13" font-weight="600" text-anchor="middle" fill="#1b2b3d">t_credit() 归还时间</text>
+<text x="310" y="576" font-size="11.5" fill="#6b7a8c">BEGIN_RESP ≡ credit + CREDIT 事件</text>
+<line x1="295" y1="594" x2="613" y2="594" stroke="#b9c7d6" stroke-width="1.6"/><polygon points="613,594 606,590 606,598" fill="#b9c7d6"/>
+<rect x="40" y="628" width="980" height="34" rx="6" fill="#f6f8fa"/>
+<text x="52" y="650" font-size="12" fill="#4b5b6d">一个 flit = 一个 tlm_generic_payload，端到端复用同一个对象；标准四相跑在 socket 上，扩展相位跑在 PEQ 里。</text>
+</svg>

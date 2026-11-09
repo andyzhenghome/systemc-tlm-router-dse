@@ -1,0 +1,22 @@
+# 本地 SystemC 源码、编译安装目录与实验缓存（约 74 MB，不入库）
+_tmp/
+.workbuddy/
+
+# 编译产物（源码与 Makefile 入库，可执行文件由读者自行编译）
+*.exe
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+/code/noc_txn_demo
+/code/tour
+/code/flit_level/noc_demo_flit
+
+# 日志、预览与 Python 缓存
+*.log
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db

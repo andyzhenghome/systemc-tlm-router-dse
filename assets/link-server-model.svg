@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img">
+<title>链路单服务器服务模型与时间线</title>
+<desc>事务 A 先占用输出链路，事务 B 到达时发现 link_free_at 尚未到期，于是排队；排队等待全部通过 delay 时间注解向下游传递。</desc>
+<text x="40.0" y="32.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="17" fill="#2C2C2A" text-anchor="start" font-weight="500">链路单服务器：拥塞从哪里来</text>
+<text x="40.0" y="54.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">每个输出端口维护一个「忙到何时」的时间戳，其余全是普通的时间注解算术</text>
+<rect x="40.0" y="76.0" width="200.0" height="54.0" rx="10.0" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.9"/>
+<text x="56.0" y="100.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" fill="#2C2C2A" text-anchor="start" font-weight="500">事务到达</text>
+<text x="56.0" y="120.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">arrival = now + delay</text>
+<line x1="240.0" y1="103.0" x2="271.0" y2="103.0" stroke="#5F5E5A" stroke-width="1.6"/>
+<path d="M270.0 99.0 L278.0 103.0 L270.0 107.0 Z" fill="#5F5E5A"/>
+<rect x="280.0" y="76.0" width="210.0" height="54.0" rx="10.0" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.9"/>
+<text x="296.0" y="100.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" fill="#2C2C2A" text-anchor="start" font-weight="500">路由计算</text>
+<text x="296.0" y="120.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">op = route(dst)，+ t_rc</text>
+<line x1="490.0" y1="103.0" x2="521.0" y2="103.0" stroke="#5F5E5A" stroke-width="1.6"/>
+<path d="M520.0 99.0 L528.0 103.0 L520.0 107.0 Z" fill="#5F5E5A"/>
+<rect x="530.0" y="76.0" width="220.0" height="54.0" rx="10.0" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.9"/>
+<text x="546.0" y="100.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" fill="#2C2C2A" text-anchor="start" font-weight="500">链路排队</text>
+<text x="546.0" y="120.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">start = max(arrival+t_rc, link_free_at[op])</text>
+<line x1="750.0" y1="103.0" x2="781.0" y2="103.0" stroke="#5F5E5A" stroke-width="1.6"/>
+<path d="M780.0 99.0 L788.0 103.0 L780.0 107.0 Z" fill="#5F5E5A"/>
+<rect x="790.0" y="76.0" width="170.0" height="54.0" rx="10.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.9"/>
+<text x="806.0" y="100.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" fill="#2C2C2A" text-anchor="start" font-weight="500">转发下一跳</text>
+<text x="806.0" y="120.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">delay = done_at - now</text>
+<rect x="40.0" y="146.0" width="920.0" height="46.0" rx="8.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="58.0" y="176.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="start" font-weight="400">service = t_link + msg_bytes / link_bw       ｜       link_free_at[op] = start + service       ｜       queue_wait = start - arrival - t_rc</text>
+<text x="40.0" y="224.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" fill="#2C2C2A" text-anchor="start" font-weight="500">时间线示例：同一输出端口先后到达 A、B 两条消息（service = 5 ns）</text>
+<line x1="90.0" y1="246.0" x2="90.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="90.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">0</text>
+<line x1="160.0" y1="246.0" x2="160.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="160.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">1</text>
+<line x1="230.0" y1="246.0" x2="230.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="230.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">2</text>
+<line x1="300.0" y1="246.0" x2="300.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="300.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">3</text>
+<line x1="370.0" y1="246.0" x2="370.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="370.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">4</text>
+<line x1="440.0" y1="246.0" x2="440.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="440.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">5</text>
+<line x1="510.0" y1="246.0" x2="510.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="510.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">6</text>
+<line x1="580.0" y1="246.0" x2="580.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="580.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">7</text>
+<line x1="650.0" y1="246.0" x2="650.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="650.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">8</text>
+<line x1="720.0" y1="246.0" x2="720.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="720.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">9</text>
+<line x1="790.0" y1="246.0" x2="790.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="790.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">10</text>
+<line x1="860.0" y1="246.0" x2="860.0" y2="338.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="860.0" y="358.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">11</text>
+<line x1="90.0" y1="330.0" x2="930.0" y2="330.0" stroke="#2C2C2A" stroke-width="1.2"/>
+<text x="934.0" y="334.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">ns</text>
+<rect x="90.0" y="258.0" width="350.0" height="26.0" rx="5.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.0"/>
+<text x="98.0" y="277.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="400">A 服务 0–5 ns</text>
+<rect x="230.0" y="292.0" width="210.0" height="26.0" rx="5.0" fill="#FAECE7" stroke="#993C1D" stroke-width="1.0"/>
+<text x="238.0" y="311.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#993C1D" text-anchor="start" font-weight="400">B 排队 2–5 ns（wait = 3）</text>
+<rect x="440.0" y="292.0" width="350.0" height="26.0" rx="5.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.0"/>
+<text x="448.0" y="311.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="400">B 服务 5–10 ns</text>
+<line x1="230.0" y1="250.0" x2="230.0" y2="330.0" stroke="#993C1D" stroke-width="1.0" stroke-dasharray="3,3"/>
+<text x="230.0" y="246.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#993C1D" text-anchor="middle" font-weight="400">B 到达</text>
+<line x1="440.0" y1="250.0" x2="440.0" y2="330.0" stroke="#0F6E56" stroke-width="1.0" stroke-dasharray="3,3"/>
+<text x="440.0" y="246.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#0F6E56" text-anchor="middle" font-weight="400">link_free_at 到期</text>
+<text x="40.0" y="386.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">没有 wait()，没有时钟沿：B 的排队时间直接加进 delay，下游在 now+delay 语义上处理它</text>
+</svg>

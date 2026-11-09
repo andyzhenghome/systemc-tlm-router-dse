@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="350" viewBox="0 0 1000 350" role="img">
+<title>消息长度与链路带宽敏感性</title>
+<desc>服务时间 msg_bytes/link_bw 是唯一决定链路服务率的参数：32 B@16 B/ns 与 64 B@32 B/ns 得到完全相同的 25.41 ns 延迟。</desc>
+<text x="40.0" y="32.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="17" fill="#2C2C2A" text-anchor="start" font-weight="500">服务需求：消息长度与带宽是同一件事</text>
+<text x="40.0" y="54.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">4×4 mesh ｜ XY ｜ uniform ｜ gap=4 ｜ service = t_link + msg_bytes / link_bw</text>
+<text x="70.0" y="96.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="start" font-weight="500">消息长度（link_bw = 16 B/ns）</text>
+<line x1="70.0" y1="262.0" x2="460.0" y2="262.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="62.0" y="266.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">0</text>
+<line x1="70.0" y1="203.6" x2="460.0" y2="203.6" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="62.0" y="207.6" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">100</text>
+<line x1="70.0" y1="145.2" x2="460.0" y2="145.2" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="62.0" y="149.2" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">200</text>
+<line x1="70.0" y1="116.0" x2="460.0" y2="116.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="62.0" y="120.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">250</text>
+<line x1="70.0" y1="116.0" x2="70.0" y2="262.0" stroke="#2C2C2A" stroke-width="1.0"/>
+<rect x="96.0" y="247.2" width="56.0" height="14.8" rx="3.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.9"/>
+<text x="124.0" y="241.2" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#185FA5" text-anchor="middle" font-weight="400">25.4</text>
+<text x="124.0" y="282.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">32 B</text>
+<text x="124.0" y="298.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="middle" font-weight="400">t_ser=2 ns</text>
+<rect x="188.0" y="226.4" width="56.0" height="35.6" rx="3.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.9"/>
+<text x="216.0" y="220.4" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#185FA5" text-anchor="middle" font-weight="400">61.0</text>
+<text x="216.0" y="282.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">64 B</text>
+<text x="216.0" y="298.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="middle" font-weight="400">t_ser=4 ns</text>
+<rect x="280.0" y="189.8" width="56.0" height="72.2" rx="3.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.9"/>
+<text x="308.0" y="183.8" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#185FA5" text-anchor="middle" font-weight="400">123.6</text>
+<text x="308.0" y="282.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">128 B</text>
+<text x="308.0" y="298.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="middle" font-weight="400">t_ser=8 ns</text>
+<rect x="372.0" y="124.8" width="56.0" height="137.2" rx="3.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.9"/>
+<text x="400.0" y="118.8" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#185FA5" text-anchor="middle" font-weight="400">235.0</text>
+<text x="400.0" y="282.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">256 B</text>
+<text x="400.0" y="298.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="middle" font-weight="400">t_ser=16 ns</text>
+<text x="265.0" y="318.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">延迟 ∝ 消息长度，吞吐从 3780 降到 719 msgs/us</text>
+<text x="560.0" y="96.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="start" font-weight="500">链路带宽（msg_bytes = 64 B）</text>
+<line x1="560.0" y1="262.0" x2="950.0" y2="262.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="552.0" y="266.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">0</text>
+<line x1="560.0" y1="203.6" x2="950.0" y2="203.6" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="552.0" y="207.6" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">100</text>
+<line x1="560.0" y1="145.2" x2="950.0" y2="145.2" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="552.0" y="149.2" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">200</text>
+<line x1="560.0" y1="116.0" x2="950.0" y2="116.0" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="552.0" y="120.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="end" font-weight="400">250</text>
+<line x1="560.0" y1="116.0" x2="560.0" y2="262.0" stroke="#2C2C2A" stroke-width="1.0"/>
+<rect x="586.0" y="189.8" width="56.0" height="72.2" rx="3.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.9"/>
+<text x="614.0" y="183.8" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#0F6E56" text-anchor="middle" font-weight="400">123.6</text>
+<text x="614.0" y="282.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">8 B/ns</text>
+<text x="614.0" y="298.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="middle" font-weight="400">t_ser=8 ns</text>
+<rect x="678.0" y="226.4" width="56.0" height="35.6" rx="3.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.9"/>
+<text x="706.0" y="220.4" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#0F6E56" text-anchor="middle" font-weight="400">61.0</text>
+<text x="706.0" y="282.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">16 B/ns</text>
+<text x="706.0" y="298.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="middle" font-weight="400">t_ser=4 ns</text>
+<rect x="770.0" y="247.2" width="56.0" height="14.8" rx="3.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.9"/>
+<text x="798.0" y="241.2" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#0F6E56" text-anchor="middle" font-weight="400">25.4</text>
+<text x="798.0" y="282.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">32 B/ns</text>
+<text x="798.0" y="298.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="middle" font-weight="400">t_ser=2 ns</text>
+<text x="755.0" y="318.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="middle" font-weight="400">32 B@16 与 64 B@32 得到完全相同的 25.41 ns</text>
+</svg>

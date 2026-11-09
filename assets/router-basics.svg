@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img">
+<title>Router 的基本原理：一条消息如何穿过一跳</title>
+<desc>输入端口缓冲、路由计算、虚通道分配、交换分配、crossbar 穿越构成一跳；credit 流控保证下游有缓冲才发送；NoC 由 router 与链路按拓扑连起来。</desc>
+<text x="40.0" y="32.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="17" fill="#2C2C2A" text-anchor="start" font-weight="500">Router 的基本原理：一条消息如何穿过一跳</text>
+<text x="40.0" y="54.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">5 端口（N / E / S / W / L）结构，取自 ASPDAC 2006 的真实虚通道 router 架构</text>
+<rect x="40.0" y="80.0" width="300.0" height="190.0" rx="10.0" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.9"/>
+<text x="190.0" y="104.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="middle" font-weight="500">router（本跳）</text>
+<rect x="56.0" y="140.0" width="46.0" height="26.0" rx="4.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.7"/>
+<text x="79.0" y="158.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">W</text>
+<rect x="146.0" y="116.0" width="46.0" height="26.0" rx="4.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.7"/>
+<text x="169.0" y="134.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">N</text>
+<rect x="146.0" y="208.0" width="46.0" height="26.0" rx="4.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.7"/>
+<text x="169.0" y="226.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">S</text>
+<rect x="246.0" y="140.0" width="46.0" height="26.0" rx="4.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.7"/>
+<text x="269.0" y="158.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">E</text>
+<rect x="112.0" y="140.0" width="116.0" height="54.0" rx="6.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="170.0" y="162.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">输入缓冲 + 路由</text>
+<text x="170.0" y="180.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#2C2C2A" text-anchor="middle" font-weight="400">+ 仲裁 → XBAR</text>
+<line x1="228.0" y1="167.0" x2="241.0" y2="167.0" stroke="#0F6E56" stroke-width="1.6"/>
+<path d="M240.0 163.0 L248.0 167.0 L240.0 171.0 Z" fill="#0F6E56"/>
+<text x="56.0" y="254.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">本地端口 L：接本节点的网络接口</text>
+<text x="56.0" y="272.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">每条输出链路一次只服务一条消息</text>
+<text x="370.0" y="88.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="start" font-weight="500">一跳的四级流水（BookSim2 IQRouter）</text>
+<rect x="370.0" y="100.0" width="145.0" height="62.0" rx="7.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="382.0" y="124.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="500">RC 路由计算</text>
+<text x="382.0" y="144.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="start" font-weight="400">查目的坐标，定输出端口</text>
+<line x1="516.0" y1="131.0" x2="517.0" y2="131.0" stroke="#5F5E5A" stroke-width="1.6"/>
+<path d="M516.0 127.0 L524.0 131.0 L516.0 135.0 Z" fill="#5F5E5A"/>
+<rect x="525.0" y="100.0" width="145.0" height="62.0" rx="7.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="537.0" y="124.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="500">VA 虚通道分配</text>
+<text x="537.0" y="144.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="start" font-weight="400">为消息申请下游通道</text>
+<line x1="671.0" y1="131.0" x2="672.0" y2="131.0" stroke="#5F5E5A" stroke-width="1.6"/>
+<path d="M671.0 127.0 L679.0 131.0 L671.0 135.0 Z" fill="#5F5E5A"/>
+<rect x="680.0" y="100.0" width="145.0" height="62.0" rx="7.0" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.8"/>
+<text x="692.0" y="124.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="500">SA 交换分配</text>
+<text x="692.0" y="144.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="start" font-weight="400">仲裁谁本周期用 crossbar</text>
+<line x1="826.0" y1="131.0" x2="827.0" y2="131.0" stroke="#5F5E5A" stroke-width="1.6"/>
+<path d="M826.0 127.0 L834.0 131.0 L826.0 135.0 Z" fill="#5F5E5A"/>
+<rect x="835.0" y="100.0" width="145.0" height="62.0" rx="7.0" fill="#FAECE7" stroke="#993C1D" stroke-width="0.8"/>
+<text x="847.0" y="124.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="500">ST 交换穿越</text>
+<text x="847.0" y="144.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="10" fill="#5F5E5A" text-anchor="start" font-weight="400">经 crossbar 送到输出链路</text>
+<rect x="370.0" y="180.0" width="590.0" height="76.0" rx="8.0" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.7"/>
+<text x="388.0" y="204.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#2C2C2A" text-anchor="start" font-weight="500">credit 流控：上游先有信用才发</text>
+<text x="388.0" y="226.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">① NI 持有 ni_window 个 credit  →  ② 发一条消息消耗一个  →  ③ 下游缓冲释放后归还 credit</text>
+<text x="388.0" y="244.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="11" fill="#5F5E5A" text-anchor="start" font-weight="400">没有信用就必须等；这保证不会向下游溢出，也让拥塞可被观测</text>
+<rect x="40.0" y="292.0" width="920.0" height="60.0" rx="8.0" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+<text x="58.0" y="318.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="start" font-weight="400">本文把四级流水合并成 t_rc，把输出链路看成单服务器：service = t_link + msg_bytes / link_bw</text>
+<text x="58.0" y="340.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="12" fill="#5F5E5A" text-anchor="start" font-weight="400">一跳的绝对时刻 = arrival + t_rc + 排队等待 + service，全部折算进 TLM 的 delay 注解</text>
+<rect x="40.0" y="362.0" width="920.0" height="46.0" rx="8.0" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.7"/>
+<text x="58.0" y="390.0" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13" fill="#2C2C2A" text-anchor="start" font-weight="400">NoC = router + 链路：换拓扑只改连线，不改 router；换路由只改 route_port()，不改连线。</text>
+</svg>
